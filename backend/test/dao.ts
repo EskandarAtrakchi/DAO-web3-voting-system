@@ -6,10 +6,11 @@ describe("DAO", function () {
     const [owner, voter1, voter2] = await ethers.getSigners();
     const DAO = await ethers.getContractFactory("DAO");
     const dao = await DAO.deploy();
-    await dao.deployed();
-
+    await dao.waitForDeployment(); // Correct way to wait for deployment in ethers v6
+  
     return { dao, owner, voter1, voter2 };
   }
+  
 
   describe("Proposal Creation", function () {
     it("Should allow a user to create a proposal", async function () {
