@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { WalletConnect } from "@/components/wallet-connect"
 import { ProposalList } from "@/components/proposal-list"
@@ -14,6 +14,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import { useMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 export default function DaoInterface() {
   const [connected, setConnected] = useState(false)
@@ -77,11 +78,12 @@ export default function DaoInterface() {
           <ThemeToggle />
           <WalletConnect
             connected={connected}
-            address={address}
+            // address={address}
             balance={balance}
             onConnect={connectWallet}
             onDisconnect={disconnectWallet}
           />
+          
         </div>
       </header>
 
@@ -121,9 +123,11 @@ export default function DaoInterface() {
                 To participate in voting and proposal creation, you need to connect your Ethereum wallet. This allows
                 you to interact with the DAO smart contract.
               </p>
-              <Button size="lg" onClick={connectWallet}>
-                Connect Wallet
-              </Button>
+              {/* <Button size="lg" onClick={connectWallet}>
+              Exploring ↪
+              </Button> */}
+              {/* /**web3 wallet connection */ }
+              <ConnectButton />
             </div>
           </CardContent>
           <CardFooter className="flex justify-between border-t pt-6">

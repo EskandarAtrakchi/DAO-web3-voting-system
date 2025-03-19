@@ -178,12 +178,14 @@ export function ProposalList() {
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Proposal #{selectedProposal.id}</DialogTitle>
-              <DialogDescription>
+              <div className="flex items-center gap-2 mt-1">
                 {getStatusBadge(selectedProposal.status)}
-                <span className="ml-2 text-muted-foreground">
-                  Proposed by {selectedProposal.proposer} • {selectedProposal.created}
-                </span>
-              </DialogDescription>
+                <DialogDescription>
+                  <span className="text-muted-foreground">
+                    Proposed by {selectedProposal.proposer} • {selectedProposal.created}
+                  </span>
+                </DialogDescription>
+              </div>
             </DialogHeader>
 
             <div className="space-y-4">
@@ -224,7 +226,7 @@ export function ProposalList() {
                 <div className={`flex gap-2 ${isMobile ? "w-full" : ""}`}>
                   <Button
                     variant="outline"
-                    className="border-green-500 text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-950"
+                    // className="border-green-500 text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-400 dark:hover:bg-green-950"
                     onClick={() => handleVote(selectedProposal.id, "For")}
                     disabled={isVoting}
                     {...(isMobile ? { className: "flex-1" } : {})}
@@ -233,7 +235,7 @@ export function ProposalList() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="border-red-500 text-red-700 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
+                    // className="border-red-500 text-red-700 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950"
                     onClick={() => handleVote(selectedProposal.id, "Against")}
                     disabled={isVoting}
                     {...(isMobile ? { className: "flex-1" } : {})}
