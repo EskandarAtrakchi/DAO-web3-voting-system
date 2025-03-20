@@ -18,19 +18,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js with pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: 'pnpm'
+          cache: 'pnpm'  # Speeds up install
 
-      - name: Enable Corepack and Activate pnpm
+      - name: Enable Corepack and Setup pnpm
         run: |
           corepack enable
-          corepack prepare pnpm@8.15.4 --activate  # pin to specific version for stability
+          corepack prepare pnpm@8.15.4 --activate
+          pnpm -v
 
       - name: Install dependencies with pnpm
         run: pnpm install
@@ -48,20 +49,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
 
-      - name: Build with Next.js
+      - name: Build the site
         run: pnpm run build
 
-      - name: Upload artifact for GitHub Pages
+      - name: Upload static files artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./out  # output directory for 'output: export'
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
