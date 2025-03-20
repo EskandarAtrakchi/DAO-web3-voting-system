@@ -1,7 +1,7 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  output: 'export',
+  output: 'export', // Important for static export
   assetPrefix: isProd ? '/DAO-web3-voting-system/' : '',
   basePath: isProd ? '/DAO-web3-voting-system' : '',
 };

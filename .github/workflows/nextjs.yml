@@ -18,21 +18,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: 'pnpm'
 
       - name: Install pnpm
-        run: npm install -g pnpm  # Install pnpm globally
+        run: npm install -g pnpm
 
       - name: Install dependencies with pnpm
         run: pnpm install
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
@@ -46,9 +47,9 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
 
       - name: Build with Next.js
-        run: pnpm run build && pnpm run export
+        run: pnpm run build
 
-      - name: Upload artifact
+      - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
