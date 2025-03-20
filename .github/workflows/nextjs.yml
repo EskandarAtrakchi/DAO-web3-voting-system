@@ -21,16 +21,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js and enable pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: 'pnpm'
 
+<<<<<<< HEAD
       - name: Enable Corepack and Activate pnpm
         run: |
           corepack enable
           corepack prepare pnpm@8.15.4 --activate  # pin to specific version for stability
+=======
+      - name: Enable Corepack (pnpm)
+        run: corepack enable && corepack prepare pnpm@latest --activate
+>>>>>>> 5449de6de28726c11cd4576490a0928095eaa7e7
 
       - name: Install dependencies with pnpm
         run: pnpm install
