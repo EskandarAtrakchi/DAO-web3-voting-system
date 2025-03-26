@@ -21,7 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js and pnpm
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -31,10 +31,12 @@ jobs:
         run: |
           corepack enable
           npm install -g pnpm
+          export PATH="$(npm root -g)/pnpm/bin:$PATH"
+          echo "PNPM PATH: $(which pnpm)"
           pnpm -v
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
