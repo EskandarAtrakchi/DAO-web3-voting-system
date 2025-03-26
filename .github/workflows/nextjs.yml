@@ -21,19 +21,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js with pnpm
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: 'pnpm'  # Speeds up install
+          cache: 'pnpm'
 
-      - name: Enable Corepack and Setup pnpm
+      - name: Install pnpm
         run: |
           corepack enable
-          corepack prepare pnpm@8.15.4 --activate
+          npm install -g pnpm
           pnpm -v
 
-      - name: Install dependencies with pnpm
+      - name: Install dependencies
         run: pnpm install
 
       - name: Setup GitHub Pages
@@ -55,7 +55,7 @@ jobs:
       - name: Upload static files artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out  # output directory for 'output: export'
+          path: ./out  # Ensure 'output: export' is set in next.config.js
 
   deploy:
     needs: build
