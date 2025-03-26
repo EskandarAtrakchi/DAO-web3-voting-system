@@ -102,7 +102,7 @@ export function VotingHistory({ address }: VotingHistoryProps) {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <p className="text-muted-foreground mb-2">You haven't voted on any proposals yet.</p>
+              <p className="text-muted-foreground mb-2">You haven&apos;t voted on any proposals yet.</p>
               <p className="text-sm text-muted-foreground">
                 When you vote on proposals, your voting history will appear here.
               </p>

@@ -82,10 +82,13 @@ export function WalletConnect({ connected, balance, onConnect, onDisconnect }: W
               </div>
 
               <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">Your Wallet</div>
+              <div className="text-sm text-muted-foreground">Info About Your Wallet</div>
               <div className="flex items-center justify-between bg-muted p-2 rounded-md">
                 {address ? (
-                  <code className="text-sm truncate max-w-[180px]">{address}</code>
+                  <>
+                    <span>You&apos;r Connected, Your Wallet</span>
+                    <code className="text-sm truncate max-w-[180px]">{address}</code>
+                  </>
                 ) : (
                   <span className="text-sm text-gray-500 italic">Not connected yet</span>
                 )}
