@@ -30,7 +30,7 @@ jobs:
       - name: Install pnpm manually
         run: |
           npm install -g pnpm
-          export PATH="$(npm bin -g):$PATH"
+          echo "PATH=$(npm bin -g):$PATH" >> $GITHUB_ENV
           pnpm -v
 
       - name: Verify pnpm installation
