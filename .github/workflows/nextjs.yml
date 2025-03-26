@@ -21,7 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js and pnpm
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -31,9 +31,11 @@ jobs:
         run: |
           corepack enable
           npm install -g pnpm
-          export PATH="$(npm root -g)/pnpm/bin:$PATH"
-          echo "PNPM PATH: $(which pnpm)"
+          echo "PNPM Version:"
           pnpm -v
+
+      - name: Verify pnpm installation
+        run: which pnpm
 
       - name: Check for pnpm-lock.yaml
         run: |
