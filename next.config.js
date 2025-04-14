@@ -1,7 +1,10 @@
-// next.config.js
-
+/** @type {import('next').NextConfig} */
 const isGithubPages = process.env.NODE_ENV === 'production'
 
-export const output = 'export'
-export const basePath = isGithubPages ? '/DAO-web3-voting-system' : ''
-export const assetPrefix = isGithubPages ? '/DAO-web3-voting-system/' : ''
+const nextConfig = {
+  output: 'export',
+  basePath: isGithubPages ? '/DAO-web3-voting-system' : '',
+  assetPrefix: isGithubPages ? '/DAO-web3-voting-system/' : '',
+}
+
+module.exports = nextConfig
