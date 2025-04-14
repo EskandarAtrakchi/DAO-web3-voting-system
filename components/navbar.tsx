@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { useWeb3 } from "@/components/web3-provider"
 import { formatAddress } from "@/lib/utils"
-import { LayoutDashboard, FileText, Wallet, Users, LogOut } from "lucide-react"
+import { LayoutDashboard, FileText, Wallet, Users, LogOut, HelpCircle } from "lucide-react"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -31,6 +31,11 @@ export function Navbar() {
       name: "Members",
       href: "/members",
       icon: <Users className="h-4 w-4 mr-2" />,
+    },
+    {
+      name: "About",
+      href: "/about",
+      icon: <HelpCircle className="h-4 w-4 mr-2" />,
     },
   ]
 

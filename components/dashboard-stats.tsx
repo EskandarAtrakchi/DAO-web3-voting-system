@@ -13,7 +13,7 @@ export function DashboardStats() {
   const [stats, setStats] = useState({
     totalProposals: 0,
     activeProposals: 0,
-    totalMembers: 0,
+    totalVotes: 0,
     avgParticipation: 0,
   })
   const [treasury, setTreasury] = useState({
@@ -30,40 +30,35 @@ export function DashboardStats() {
       try {
         setLoading(true)
 
-        try {
-          // Fetch DAO stats
-          const daoStats = await contract.getDAOStats()
-          setStats({
-            totalProposals: Number(daoStats[0]),
-            activeProposals: Number(daoStats[1]),
-            totalMembers: Number(daoStats[2]),
-            avgParticipation: Number(daoStats[3]),
-          })
+        // Fetch DAO stats
+        const daoStats = await contract.getDAOStats()
+        setStats({
+          totalProposals: Number(daoStats[0]),
+          activeProposals: Number(daoStats[1]),
+          totalVotes: Number(daoStats[2]), // We renamed this from totalMembers to totalVotes
+          avgParticipation: Number(daoStats[3]),
+        })
 
-          // Fetch treasury info
-          const treasuryInfo = await contract.getTreasuryInfo()
-          setTreasury({
-            balance: treasuryInfo[0],
-            inflow: treasuryInfo[1],
-            outflow: treasuryInfo[2],
-          })
-        } catch (contractError) {
-          console.error("Error fetching contract data:", contractError)
-          // Set default values if contract calls fail
-          setStats({
-            totalProposals: 0,
-            activeProposals: 0,
-            totalMembers: 0,
-            avgParticipation: 0,
-          })
-          setTreasury({
-            balance: BigInt(0),
-            inflow: BigInt(0),
-            outflow: BigInt(0),
-          })
-        }
+        // Fetch treasury info
+        const treasuryInfo = await contract.getTreasuryInfo()
+        setTreasury({
+          balance: treasuryInfo[0],
+          inflow: treasuryInfo[1],
+          outflow: treasuryInfo[2],
+        })
       } catch (error) {
         console.error("Error fetching stats:", error)
+        setStats({
+          totalProposals: 0,
+          activeProposals: 0,
+          totalVotes: 0,
+          avgParticipation: 0,
+        })
+        setTreasury({
+          balance: BigInt(0),
+          inflow: BigInt(0),
+          outflow: BigInt(0),
+        })
       } finally {
         setLoading(false)
       }
@@ -78,7 +73,7 @@ export function DashboardStats() {
         <StatCard title="Total Proposals" value="-" />
         <StatCard title="Active Proposals" value="-" />
         <StatCard title="Treasury Balance" value="-" />
-        <StatCard title="Members" value="-" />
+        <StatCard title="Total Votes" value="-" />
       </>
     )
   }
@@ -98,8 +93,8 @@ export function DashboardStats() {
         value={loading ? <Loader2 className="h-4 w-4 animate-spin" /> : `${formatEther(treasury.balance)} ETH`}
       />
       <StatCard
-        title="Members"
-        value={loading ? <Loader2 className="h-4 w-4 animate-spin" /> : stats.totalMembers.toString()}
+        title="Avg voters"
+        value={loading ? <Loader2 className="h-4 w-4 animate-spin" /> : stats.totalVotes.toString()}
       />
     </>
   )
