@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/members/page": "/members",
+  "/page": "/",
+  "/proposals/[id]/page": "/proposals/[id]",
+  "/proposals/create/page": "/proposals/create",
+  "/proposals/page": "/proposals",
+  "/treasury/page": "/treasury"
+}
